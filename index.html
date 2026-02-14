@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Shabu • Always</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: #f4f1ee;
+  color: #2b2b2b;
+  text-align: center;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url("hero.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
+}
+
+.hero-text {
+  position: relative;
+  color: white;
+  max-width: 700px;
+  padding: 20px;
+}
+
+.hero-text h1 {
+  font-weight: normal;
+  font-size: 48px;
+}
+
+.section {
+  padding: 80px 20px;
+  max-width: 800px;
+  margin: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h2 {
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+img {
+  width: 90%;
+  max-width: 700px;
+  border-radius: 14px;
+  margin-top: 20px;
+}
+
+.caption {
+  font-style: italic;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #666;
+}
+
+button {
+  padding: 12px 28px;
+  font-size: 16px;
+  border: 1px solid #2b2b2b;
+  background: transparent;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #2b2b2b;
+  color: white;
+}
+
+.hidden {
+  display: none;
+  margin-top: 25px;
+  font-style: italic;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <div class="overlay"></div>
+  <div class="hero-text">
+    <h1>For Shabu.</h1>
+    <p>Distance measures geography. Not significance.</p>
+  </div>
+</div>
+
+<div class="section">
+  <p class="caption">Shabu in my arms.</p>
+</div>
+
+<div class="section">
+  <h2>The Beginning</h2>
+  <img src="origin.jpg">
+  <p class="caption">The first photo is always special ❤️</p>
+  <p>
+  Not because it was flawless.  
+  But because it marked the moment  
+  where possibility became real.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Bloom</h2>
+  <img src="bloom.jpg">
+  <p class="caption">My Shabu — a phool ki kali.</p>
+  <p>
+  Not loud.  
+  Not ornamental.  
+  Just quietly unfolding in her own certainty.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Conversation</h2>
+  <img src="listen.jpg">
+  <p class="caption">I could listen to you all day.</p>
+  <p>
+  Because when you speak,  
+  I feel included in your world —  
+  not impressed, not overwhelmed —  
+  simply connected.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Reflection</h2>
+  <img src="reflection.jpg">
+  <p class="caption">In every reflection, I see you.</p>
+  <p>
+  Not just in mirrors.  
+  But in decisions,  
+  in thoughts I revisit,  
+  in futures I imagine.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Home</h2>
+  <img src="home.jpg">
+  <p class="caption">
+  The only thing you love more than me… is food.  
+  Good. I’ll cook for you.
+  </p>
+  <p>
+  Shared meals.  
+  Quiet evenings.  
+  A life that doesn’t need spectacle.
+  </p>
+</div>
+
+<div class="section">
+  <h2>Under the Stars</h2>
+  <img src="stars.jpg">
+  <p class="caption">To that most memorable night under the stars.</p>
+  <p>
+  Just quiet light, shared silence,  
+  and the kind of presence  
+  that makes the world feel smaller —  
+  and us feel certain.
+  </p>
+</div>
+
+<div class="section">
+  <h2>The Future</h2>
+  <p>
+  I don’t want grand declarations.  
+  I want mornings.  
+  Conversations that run longer than planned.  
+  Familiar silences.
+  </p>
+  <p>
+  One day this page will feel unnecessary.  
+  Because I’ll say these things beside you —  
+  not across cities.
+  </p>
+</div>
+
+<div class="section">
+  <h2>A Small Experiment</h2>
+  <p>If you miss me, press the button.</p>
+  <button onclick="reveal()">Click.</button>
+  <div id="secret" class="hidden">
+    Empirical conclusion: attachment persists across distance.  
+    Also — I miss you more.
+  </div>
+</div>
+
+<div style="margin-top:120px;">
+  <p style="
+    opacity: 0.06;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: opacity 0.8s ease;
+  "
+  onmouseover="this.style.opacity='0.4'"
+  onmouseout="this.style.opacity='0.06'">
+    I am building a life where you are not distant.
+  </p>
+</div>
+
+<script>
+function reveal() {
+  document.getElementById("secret").style.display = "block";
+}
+
+const sections = document.querySelectorAll('.section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(section => {
+  observer.observe(section);
+});
+</script>
+
+</body>
+</html>
