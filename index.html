@@ -2,22 +2,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Shabu • Always</title>
+<title>For Shabu � Always</title>
 
 <style>
 body {
   margin: 0;
   font-family: "Georgia", serif;
-  background: linear-gradient(180deg, #f3e6de 0%, #e6e1f4 100%);
   color: #2b2b2b;
   text-align: center;
   overflow-x: hidden;
 }
 
+/* Strong vertical gradient */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #f2ddd2 0%,
+    #e3d6f3 40%,
+    #1c1c2e 85%,
+    #12121a 100%
+  );
+  z-index: -2;
+}
+
 /* Larger typography */
-h1 { font-size: 52px; }
-h2 { font-size: 34px; margin-bottom: 20px; }
-p  { font-size: 23px; line-height: 1.9; }
+h1 { font-size: 54px; }
+h2 { font-size: 36px; margin-bottom: 20px; }
+p  { font-size: 24px; line-height: 1.9; }
 
 /* Hero */
 .hero {
@@ -31,9 +45,8 @@ p  { font-size: 23px; line-height: 1.9; }
 
 .overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.65));
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
 }
 
 .hero-text {
@@ -45,14 +58,13 @@ p  { font-size: 23px; line-height: 1.9; }
 
 /* Sections */
 .section {
-  padding: 110px 25px;
+  padding: 120px 25px;
   max-width: 900px;
   margin: auto;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.2s ease, transform 1.2s ease;
   position: relative;
-  z-index: 2;
 }
 
 .section.visible {
@@ -66,27 +78,28 @@ img {
   border-radius: 18px;
   margin-top: 30px;
   position: relative;
-  z-index: 3; /* ensures stars never overlay image */
+  z-index: 2;
 }
 
-/* Bigger floating button bottom-right */
+/* Bigger floating button */
 #musicBtn {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  padding: 18px 38px;
-  font-size: 20px;
-  border-radius: 50px;
+  bottom: 30px;
+  right: 30px;
+  padding: 22px 46px;
+  font-size: 22px;
+  border-radius: 60px;
   background: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  border: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
   z-index: 9999;
   cursor: pointer;
 }
 
-/* Proper star background (behind everything) */
+/* Dark section for stars */
 .stars {
   position: relative;
+  color: white;
 }
 
 .stars::before {
@@ -94,28 +107,41 @@ img {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(white 1.2px, transparent 1.2px);
-  background-size: 4px 4px;
-  opacity: 0.15;
-  animation: moveStars 100s linear infinite;
-  z-index: 1; /* behind image & text */
-  pointer-events: none;
+    radial-gradient(white 2px, transparent 2px);
+  background-size: 6px 6px;
+  opacity: 0.35;
+  animation: moveStars 120s linear infinite;
+  z-index: 0;
 }
 
 @keyframes moveStars {
   from { transform: translate(0,0); }
-  to { transform: translate(200px,200px); }
+  to { transform: translate(400px,400px); }
 }
 
-/* Hidden bottom easter egg */
+/* Hidden message */
+.hidden {
+  display: none;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Easter egg */
 .easter {
   opacity: 0.08;
-  font-size: 18px;
-  margin-top: 160px;
+  font-size: 20px;
+  margin-top: 200px;
   transition: opacity 0.8s ease;
 }
 .easter:hover {
-  opacity: 0.5;
+  opacity: 0.6;
+}
+
+/* Countdown styling */
+#countdown {
+  font-size: 28px;
+  margin-top: 30px;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -125,11 +151,11 @@ img {
 <div class="hero">
   <div class="overlay"></div>
   <div class="hero-text">
-    <h1>I may be distant, but definitely not "distant" from you 😉</h1>
+    <h1>I may be distant, but definitely not "distant" from you </h1>
   </div>
 </div>
 
-<button onclick="toggleMusic()" id="musicBtn">Play 🎵</button>
+<button onclick="toggleMusic()" id="musicBtn">Play </button>
 
 <audio id="bgMusic" loop preload="auto">
   <source src="shabu.mp3" type="audio/mpeg">
@@ -148,13 +174,13 @@ img {
 <div class="section">
   <h2>Bloom</h2>
   <img src="bloom.jpg">
-  <p>You may like white roses, but you are yourself a red rose 🌹 (not joking about rosacea, promise)</p>
+  <p>You may like white roses, but you are yourself a red rose  (not joking about rosacea, promise)</p>
 </div>
 
 <div class="section">
   <h2>Conversation</h2>
   <img src="listen.jpg">
-  <p>It is my favorite hobby 😁</p>
+  <p>It is my favorite hobby </p>
 </div>
 
 <div class="section">
@@ -183,6 +209,11 @@ img {
 </div>
 
 <div class="section">
+  <h2>Meeting Countdown</h2>
+  <div id="countdown"></div>
+</div>
+
+<div class="section">
   <h2>A Small Experiment</h2>
   <p>If you miss me, press the button.</p>
   <button onclick="reveal()">Click.</button>
@@ -191,7 +222,7 @@ img {
   </div>
 </div>
 
-<p class="easter">You lose. I miss you more..</p>
+<p class="easter">I can't wait to kill this distance between us</p>
 
 <script>
 function reveal() {
@@ -209,7 +240,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 sections.forEach(section => observer.observe(section));
 
-/* Smooth music fade-in */
+/* Music fade */
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
@@ -217,20 +248,31 @@ function toggleMusic() {
   if (music.paused) {
     music.volume = 0;
     music.play();
-    musicBtn.innerText = "Pause 🎵";
-
+    musicBtn.innerText = "Pause ";
     let fade = setInterval(() => {
-      if (music.volume < 0.5) {
-        music.volume += 0.03;
-      } else {
-        clearInterval(fade);
-      }
+      if (music.volume < 0.6) music.volume += 0.04;
+      else clearInterval(fade);
     }, 200);
   } else {
     music.pause();
-    musicBtn.innerText = "Play 🎵";
+    musicBtn.innerText = "Play ";
   }
 }
+
+/* Countdown to 22 Feb 11:00 */
+const targetDate = new Date("February 22, 2026 11:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  document.getElementById("countdown").innerHTML =
+    days + " days " + hours + " hrs " + minutes + " mins to go";
+}, 1000);
 </script>
 
 </body>
