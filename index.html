@@ -8,12 +8,18 @@
 body {
   margin: 0;
   font-family: "Georgia", serif;
-  background: linear-gradient(to bottom, #f7f3f1, #f2f0f6);
+  background: linear-gradient(to bottom, #f5ede8, #ece8f6);
   color: #2b2b2b;
   text-align: center;
   overflow-x: hidden;
 }
 
+/* Larger typography */
+h1 { font-size: 48px; }
+h2 { font-size: 30px; }
+p  { font-size: 20px; line-height: 1.8; }
+
+/* Hero */
 .hero {
   position: relative;
   height: 100vh;
@@ -37,17 +43,13 @@ body {
   padding: 20px;
 }
 
-.hero-text h1 {
-  font-weight: normal;
-  font-size: 42px;
-}
-
+/* Sections */
 .section {
-  padding: 80px 20px;
+  padding: 90px 20px;
   max-width: 800px;
   margin: auto;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(25px);
   transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
@@ -57,45 +59,29 @@ body {
 }
 
 img {
-  width: 90%;
-  max-width: 700px;
-  border-radius: 14px;
-  margin-top: 20px;
-}
-
-button {
-  padding: 12px 28px;
-  font-size: 16px;
-  border: 1px solid #2b2b2b;
-  background: transparent;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #2b2b2b;
-  color: white;
-}
-
-.hidden {
-  display: none;
+  width: 92%;
+  max-width: 750px;
+  border-radius: 16px;
   margin-top: 25px;
-  font-style: italic;
 }
 
-/* Floating music button */
+/* Bigger floating music button */
 #musicBtn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 32px;
+  font-size: 18px;
+  border-radius: 40px;
   background: white;
-  border-radius: 30px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   z-index: 999;
+  cursor: pointer;
 }
 
-/* Star background */
+/* Stars - stronger visibility */
 .stars {
   position: relative;
   overflow: hidden;
@@ -104,19 +90,30 @@ button:hover {
 .stars::before {
   content: "";
   position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(white 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity: 0.05;
-  animation: moveStars 60s linear infinite;
-  top: -50%;
-  left: -50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(white 1.2px, transparent 1.2px);
+  background-size: 4px 4px;
+  opacity: 0.12;
+  animation: moveStars 90s linear infinite;
+  top: -100%;
+  left: -100%;
 }
 
 @keyframes moveStars {
   from { transform: translate(0,0); }
-  to { transform: translate(200px,200px); }
+  to { transform: translate(300px,300px); }
+}
+
+/* Hidden bottom easter egg */
+.easter {
+  opacity: 0.06;
+  font-size: 14px;
+  margin-top: 140px;
+  transition: opacity 0.8s ease;
+}
+.easter:hover {
+  opacity: 0.4;
 }
 </style>
 </head>
@@ -130,7 +127,6 @@ button:hover {
   </div>
 </div>
 
-<!-- Floating Music Button -->
 <button onclick="toggleMusic()" id="musicBtn">Play 🎵</button>
 
 <audio id="bgMusic" loop preload="auto">
@@ -144,20 +140,13 @@ button:hover {
 <div class="section">
   <h2>The Beginning</h2>
   <img src="origin.jpg">
-  <p>
-  This is the smile I got inside me when I saw you for the first time,
-  and it is hard evidence!!
-  </p>
+  <p>This is the smile I got inside me when I saw you for the first time, and it is hard evidence!!</p>
 </div>
 
 <div class="section">
   <h2>Bloom</h2>
   <img src="bloom.jpg">
-  <p>
-  You may like white roses,
-  but you are yourself a red rose 🌹
-  (not joking about rosacea, promise)
-  </p>
+  <p>You may like white roses, but you are yourself a red rose 🌹 (not joking about rosacea, promise)</p>
 </div>
 
 <div class="section">
@@ -181,25 +170,14 @@ button:hover {
 <div class="section stars">
   <h2>Under the Stars</h2>
   <img src="stars.jpg">
-  <p>
-  I want to revisit this calm mindspace with you again
-  (with mosquito repellents for sure this time)
-  </p>
+  <p>I want to revisit this calm mindspace with you again (with mosquito repellents for sure this time)</p>
 </div>
 
 <div class="section">
   <h2>The Future</h2>
-  <p>
-  In future I won't do silly things like this anymore.
-  </p>
-  <p>
-  .
-  <br>.
-  </p>
-  <p>
-  Because I'll be right next to you telling you everything
-  while holding you in my arms..
-  </p>
+  <p>In future I won't do silly things like this anymore.</p>
+  <p>.</p>
+  <p>Because I'll be right next to you telling you everything while holding you in my arms..</p>
 </div>
 
 <div class="section">
@@ -210,6 +188,8 @@ button:hover {
     You lose. I miss you more..
   </div>
 </div>
+
+<p class="easter">You lose. I miss you more..</p>
 
 <script>
 function reveal() {
@@ -227,7 +207,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 sections.forEach(section => observer.observe(section));
 
-/* Smooth fade-in music */
+/* Smooth music fade-in */
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
@@ -238,13 +218,12 @@ function toggleMusic() {
     musicBtn.innerText = "Pause 🎵";
 
     let fade = setInterval(() => {
-      if (music.volume < 0.4) {
-        music.volume += 0.02;
+      if (music.volume < 0.5) {
+        music.volume += 0.03;
       } else {
         clearInterval(fade);
       }
     }, 200);
-
   } else {
     music.pause();
     musicBtn.innerText = "Play 🎵";
