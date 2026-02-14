@@ -8,9 +8,10 @@
 body {
   margin: 0;
   font-family: "Georgia", serif;
-  background: #f4f1ee;
+  background: linear-gradient(to bottom, #f7f3f1, #f2f0f6);
   color: #2b2b2b;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .hero {
@@ -38,7 +39,7 @@ body {
 
 .hero-text h1 {
   font-weight: normal;
-  font-size: 48px;
+  font-size: 42px;
 }
 
 .section {
@@ -55,28 +56,11 @@ body {
   transform: translateY(0);
 }
 
-h2 {
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.7;
-}
-
 img {
   width: 90%;
   max-width: 700px;
   border-radius: 14px;
   margin-top: 20px;
-}
-
-.caption {
-  font-style: italic;
-  margin-top: 15px;
-  font-size: 16px;
-  color: #666;
 }
 
 button {
@@ -99,6 +83,41 @@ button:hover {
   margin-top: 25px;
   font-style: italic;
 }
+
+/* Floating music button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  z-index: 999;
+}
+
+/* Star background */
+.stars {
+  position: relative;
+  overflow: hidden;
+}
+
+.stars::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.05;
+  animation: moveStars 60s linear infinite;
+  top: -50%;
+  left: -50%;
+}
+
+@keyframes moveStars {
+  from { transform: translate(0,0); }
+  to { transform: translate(200px,200px); }
+}
 </style>
 </head>
 
@@ -107,99 +126,79 @@ button:hover {
 <div class="hero">
   <div class="overlay"></div>
   <div class="hero-text">
-    <h1>For Shabu.</h1>
-    <p>Distance measures geography. Not significance.</p>
+    <h1>I may be distant, but definitely not "distant" from you 😉</h1>
   </div>
 </div>
 
+<!-- Floating Music Button -->
+<button onclick="toggleMusic()" id="musicBtn">Play 🎵</button>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="shabu.mp3" type="audio/mpeg">
+</audio>
+
 <div class="section">
-  <p class="caption">Shabu in my arms.</p>
+  <p>Shabu in my arms.</p>
 </div>
 
 <div class="section">
   <h2>The Beginning</h2>
   <img src="origin.jpg">
-  <p class="caption">The first photo is always special ❤️</p>
   <p>
-  Not because it was flawless.  
-  But because it marked the moment  
-  where possibility became real.
+  This is the smile I got inside me when I saw you for the first time,
+  and it is hard evidence!!
   </p>
 </div>
 
 <div class="section">
   <h2>Bloom</h2>
   <img src="bloom.jpg">
-  <p class="caption">My Shabu — a phool ki kali.</p>
   <p>
-  Not loud.  
-  Not ornamental.  
-  Just quietly unfolding in her own certainty.
+  You may like white roses,
+  but you are yourself a red rose 🌹
+  (not joking about rosacea, promise)
   </p>
 </div>
 
 <div class="section">
   <h2>Conversation</h2>
   <img src="listen.jpg">
-  <p class="caption">I could listen to you all day.</p>
-  <p>
-  Because when you speak,  
-  I feel included in your world —  
-  not impressed, not overwhelmed —  
-  simply connected.
-  </p>
+  <p>It is my favorite hobby 😁</p>
 </div>
 
 <div class="section">
   <h2>Reflection</h2>
   <img src="reflection.jpg">
-  <p class="caption">In every reflection, I see you.</p>
-  <p>
-  Not just in mirrors.  
-  But in decisions,  
-  in thoughts I revisit,  
-  in futures I imagine.
-  </p>
+  <p>In every multiverse, in every timeline..</p>
 </div>
 
 <div class="section">
   <h2>Home</h2>
   <img src="home.jpg">
-  <p class="caption">
-  The only thing you love more than me… is food.  
-  Good. I’ll cook for you.
-  </p>
-  <p>
-  Shared meals.  
-  Quiet evenings.  
-  A life that doesn’t need spectacle.
-  </p>
+  <p>I'll fight you for my right to enter "your kitchen"</p>
 </div>
 
-<div class="section">
+<div class="section stars">
   <h2>Under the Stars</h2>
   <img src="stars.jpg">
-  <p class="caption">To that most memorable night under the stars.</p>
   <p>
-  Just quiet light, shared silence,  
-  and the kind of presence  
-  that makes the world feel smaller —  
-  and us feel certain.
+  I want to revisit this calm mindspace with you again
+  (with mosquito repellents for sure this time)
   </p>
 </div>
 
 <div class="section">
   <h2>The Future</h2>
   <p>
-  I don’t want grand declarations.  
-  I want mornings.  
-  Conversations that run longer than planned.  
-  Familiar silences.
+  In future I won't do silly things like this anymore.
   </p>
   <p>
-  One day this page will feel unnecessary.  
-  Because I’ll say these things beside you —  
-  not across cities.
+  .
+  <br>.
+  </p>
+  <p>
+  Because I'll be right next to you telling you everything
+  while holding you in my arms..
   </p>
 </div>
 
@@ -208,22 +207,8 @@ button:hover {
   <p>If you miss me, press the button.</p>
   <button onclick="reveal()">Click.</button>
   <div id="secret" class="hidden">
-    Empirical conclusion: attachment persists across distance.  
-    Also — I miss you more.
+    You lose. I miss you more..
   </div>
-</div>
-
-<div style="margin-top:120px;">
-  <p style="
-    opacity: 0.06;
-    font-size: 12px;
-    letter-spacing: 1px;
-    transition: opacity 0.8s ease;
-  "
-  onmouseover="this.style.opacity='0.4'"
-  onmouseout="this.style.opacity='0.06'">
-    I am building a life where you are not distant.
-  </p>
 </div>
 
 <script>
@@ -231,8 +216,8 @@ function reveal() {
   document.getElementById("secret").style.display = "block";
 }
 
+/* Scroll animation */
 const sections = document.querySelectorAll('.section');
-
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -240,10 +225,31 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.15 });
+sections.forEach(section => observer.observe(section));
 
-sections.forEach(section => {
-  observer.observe(section);
-});
+/* Smooth fade-in music */
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+function toggleMusic() {
+  if (music.paused) {
+    music.volume = 0;
+    music.play();
+    musicBtn.innerText = "Pause 🎵";
+
+    let fade = setInterval(() => {
+      if (music.volume < 0.4) {
+        music.volume += 0.02;
+      } else {
+        clearInterval(fade);
+      }
+    }, 200);
+
+  } else {
+    music.pause();
+    musicBtn.innerText = "Play 🎵";
+  }
+}
 </script>
 
 </body>
